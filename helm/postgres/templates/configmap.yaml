@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMaps.name }}
+  namespace: {{ .Release.Namespace }}
+data:
+  POSTGRES_DB: {{ .Values.configMaps.crawljoypostgressconfig.postgresDB | quote }}
+  POSTGRES_HOST: {{ .Values.configMaps.crawljoypostgressconfig.postgresHost | quote}}

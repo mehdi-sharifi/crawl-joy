@@ -1,0 +1,12 @@
+.
+├── Chart.yaml
+├── charts
+├── templates
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   ├── secret.yaml
+│   └── service.yaml
+├── tree_structure.txt
+└── values.yaml
+
+3 directories, 7 files

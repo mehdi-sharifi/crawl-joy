@@ -1,0 +1,25 @@
+replicaCount: 1
+
+image:
+  repository: postgres
+  tag: alpine
+
+resources:
+  limits:
+    memory: "256Mi"
+    cpu: "200m"
+  requests:
+    memory: "128Mi"
+    cpu: "100m"
+
+secrets:
+  name: crawljoypostgressecret
+  crawljoypostgressecret:
+    postgresUser: "tokyo"
+    postgresPassword: "ASFq3tt1rfc%^212fd"
+
+configMaps:
+  name: crawljoypostgressconfig
+  crawljoypostgressconfig:
+    postgresDB: "crawljoy_db"
+    postgresHost: "postgres-service"
