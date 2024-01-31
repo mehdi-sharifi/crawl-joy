@@ -3,6 +3,7 @@ import logging
 import os
 from crawler import fetch_from_bama
 from jobs import save_car_ad
+
 logger = logging.getLogger(__name__)
 
 # PostgreSQL database configuration
@@ -33,15 +34,20 @@ def create_car_ad_table(conn):
             );
         """)
     conn.commit()
-
+    
 def create_user_notify_table(conn):
-    with conn.cursor() as cursor:
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS user_notify (
-                user_email VARCHAR(255) PRIMARY KEY
-            );
-        """)
-    conn.commit()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS user_notify (
+                    user_email VARCHAR(255) PRIMARY KEY
+                );
+            """)
+        conn.commit()
+        logger.info("user_notify table created successfully.")
+    except Exception as e:
+        conn.rollback()
+        logger.error(f"Error creating user_notify table: {str(e)}")
 
 def deploy(state, conn):
     try:
@@ -71,9 +77,13 @@ def deploy(state, conn):
     except Exception as e:
         logger.error(f"An error occurred in Bama ads crawl: {e}", exc_info=True)
 
-
 def import_sample_emails(conn, sample_emails):
-    with conn.cursor() as cursor:
-        insert_query = "INSERT INTO user_notify (user_email) VALUES (%s) ON CONFLICT (user_email) DO NOTHING;"
-        cursor.executemany(insert_query, [(email,) for email in sample_emails])
-    conn.commit()
+    try:
+        with conn.cursor() as cursor:
+            insert_query = "INSERT INTO user_notify (user_email) VALUES (%s) ON CONFLICT (user_email) DO NOTHING;"
+            cursor.executemany(insert_query, [(email,) for email in sample_emails])
+        conn.commit()
+        logger.info("Sample emails imported successfully.")
+    except Exception as e:
+        conn.rollback()
+        logger.error(f"Error importing sample emails: {str(e)}")

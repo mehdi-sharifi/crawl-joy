@@ -14,9 +14,15 @@ DB_USER = os.environ.get('POSTGRES_USER')
 DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 state = os.environ.get('STATE')
 
-# Set up PostgreSQL connection
-with psycopg2.connect(
-    host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD
-) as conn:
-    crawl_bama_ads(state)
+try:
+    # Set up PostgreSQL connection
+    with psycopg2.connect(
+        host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD
+    ) as conn:
+        crawl_bama_ads(state)
 
+except psycopg2.Error as e:
+    logger.error(f"PostgreSQL error: {str(e)}")
+
+except Exception as e:
+    logger.error(f"An unexpected error occurred: {str(e)}")

@@ -91,37 +91,40 @@ def save_car_ad(conn, values):
 
 
 def send_email_async(state, url, title, year, mileage, price, recipients):
-    # Your email and password
-    email_address = EMAIL_HOST_USER
-    email_password = EMAIL_HOST_PASSWORD
+    try:
+        # Your email and password
+        email_address = EMAIL_HOST_USER
+        email_password = EMAIL_HOST_PASSWORD
 
-    # SMTP server settings (replace with your email provider's SMTP server and port)
-    smtp_server = EMAIL_HOST
-    smtp_port = 587
+        # SMTP server settings (replace with your email provider's SMTP server and port)
+        smtp_server = EMAIL_HOST
+        smtp_port = 587
 
-    # Create message
-    msg = MIMEMultipart()
-    msg['From'] = email_address
-    msg['To'] = recipients
-    msg['Subject'] = f'New Car Ads in {state}'
+        # Create message
+        msg = MIMEMultipart()
+        msg['From'] = email_address
+        msg['To'] = recipients
+        msg['Subject'] = f'New Car Ads in {state}'
 
-    # Attach body to the message
-    body = f'{title}\n سال ساخت:{year}\n کارکرد:{mileage}\n قیمت:{price}\n click here to jump in this ad:\n https://bama.ir{url}'
+        # Attach body to the message
+        body = f'{title}\n سال ساخت:{year}\n کارکرد:{mileage}\n قیمت:{price}\n click here to jump in this ad:\n https://bama.ir{url}'
 
-    msg.attach(MIMEText(body, 'plain'))
+        msg.attach(MIMEText(body, 'plain'))
 
-    # Connect to the SMTP server
-    with smtplib.SMTP(smtp_server, smtp_port) as server:
-        # Start TLS for security
-        server.starttls()
+        # Connect to the SMTP server
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            # Start TLS for security
+            server.starttls()
 
-        # Login to the email account
-        server.login(email_address, email_password)
+            # Login to the email account
+            server.login(email_address, email_password)
 
-        # Send the email
-        server.sendmail(email_address, recipients, msg.as_string())
+            # Send the email
+            server.sendmail(email_address, recipients, msg.as_string())
 
-    print('Email sent successfully!')
+        logger.info('Email sent successfully!')
+    except Exception as e:
+        logger.error(f"Error sending email: {str(e)}")
 
 def crawl_bama_ads(state):
     try:

@@ -17,10 +17,17 @@ DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 # Sample email addresses
 sample_emails = ["sample@example.com"]
 
-# Set up PostgreSQL connection
-with psycopg2.connect(
-    host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD
-) as conn:
-    create_user_notify_table(conn)
-    import_sample_emails(conn, sample_emails)
+try:
+    # Set up PostgreSQL connection
+    with psycopg2.connect(
+        host=DB_HOST, port=DB_PORT, dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD
+    ) as conn:
+        create_user_notify_table(conn)
+        import_sample_emails(conn, sample_emails)
+
+except psycopg2.Error as e:
+    logger.error(f"PostgreSQL error: {str(e)}")
+
+except Exception as e:
+    logger.error(f"An unexpected error occurred: {str(e)}")
 
