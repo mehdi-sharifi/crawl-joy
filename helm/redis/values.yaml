@@ -1,0 +1,13 @@
+replicaCount: 1
+
+image:
+  repository: redis
+  tag: latest
+
+resources:
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
+  requests:
+    memory: "64Mi"
+    cpu: "50m"
