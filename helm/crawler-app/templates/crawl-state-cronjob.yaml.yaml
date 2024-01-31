@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: crawljoy-cronjob
+  namespace: {{ .Release.Namespace }}
+
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: my-crawler-container
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              envFrom:
+              - configMapRef:
+                  name: {{ .Values.configMaps.name }}
+              - secretRef:
+                  name: {{ .Values.secrets.name }}
+
+              
+              command: ["/bin/sh"]
+              args: ["-c", "python crawl-state.py"]
+          restartPolicy: OnFailure

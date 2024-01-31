@@ -1,0 +1,32 @@
+replicaCount: 1
+
+image:
+  repository: mehdish95/crawljoy
+  tag: v4.4
+
+resources:
+  limits:
+    memory: "256Mi"
+    cpu: "200m"
+  requests:
+    memory: "128Mi"
+    cpu: "100m"
+
+secrets:
+  name: crawljoyappsecret
+  crawljoyappsecret:
+    emailHostUser: example@example.com
+    emailHostPassword: P@ssw0rd
+    postgresUser: USER
+    postgressPassword: P@ssw0rd
+
+configMaps:
+  name: crawljpyappconfig
+  crawljpyappconfig:
+    emailHost: smtp.gmail.com
+    emailUseTls: True
+    redisHost: redis-service
+    postgresDB: crawljoy_db
+    postgresHost: postgres-service
+    state: isfahan
+
