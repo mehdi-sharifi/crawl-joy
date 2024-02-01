@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: mehdish95/crawljoy
-  tag: v4.4
+  tag: v5.2
 
 resources:
   limits:
@@ -15,18 +15,19 @@ resources:
 secrets:
   name: crawljoyappsecret
   crawljoyappsecret:
-    emailHostUser: example@example.com
-    emailHostPassword: P@ssw0rd
-    postgresUser: USER
-    postgressPassword: P@ssw0rd
+    emailHostUser: sample@example.com
+    emailHostPassword: roibydtxrwkvkeev
+    postgresUser: tokyo
+    postgressPassword: ASFq3tt1rfc%^212fd
 
 configMaps:
   name: crawljpyappconfig
   crawljpyappconfig:
-    emailHost: smtp.gmail.com
+    emailHost: smtp.example.com
     emailUseTls: True
     redisHost: redis-service
+    rabitmqHost: rabbitmq-service
     postgresDB: crawljoy_db
     postgresHost: postgres-service
     state: isfahan
-
+    sampleemailaddress: user@example.com

@@ -1,9 +1,12 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: crawljoy-cronjob
+  name: crawl-new-ads
   namespace: {{ .Release.Namespace }}
-
+  labels:
+    app: crawler
+    env: production
+    
 spec:
   schedule: "*/5 * * * *"
   jobTemplate:

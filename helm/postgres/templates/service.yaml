@@ -5,7 +5,8 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   selector:
-    app: postgres
+    app: db
+    env: production 
   ports:
     - protocol: TCP
       port: 5432

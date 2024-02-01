@@ -3,7 +3,9 @@ kind: Job
 metadata:
   name: create-sample-email-job
   namespace: {{ .Release.Namespace }}
-
+  labels:
+    app: sample-email-adress
+    env: production
 spec:
   template:
     spec:

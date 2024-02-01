@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: redis
-  tag: latest
+  tag: alpine3.19
 
 resources:
   limits:

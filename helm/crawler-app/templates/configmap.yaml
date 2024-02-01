@@ -12,3 +12,4 @@ data:
   POSTGRES_HOST: {{ .Values.configMaps.crawljpyappconfig.postgresHost | quote }}
   POSTGRES_PORT: {{ .Values.configMaps.crawljpyappconfig.postgresPort | quote }}
   STATE: {{ .Values.configMaps.crawljpyappconfig.state | quote }}
+  SAMPLE_EMAIL_ADDRESS: {{ .Values.configMaps.crawljpyappconfig.sampleemailaddress | quote }}

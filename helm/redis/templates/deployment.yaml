@@ -3,15 +3,21 @@ kind: Deployment
 metadata:
   name: redis
   namespace: {{ .Release.Namespace }}
+  labels:
+    app: redis
+    env: production   
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: redis
+      env: production   
   template:
     metadata:
+      name: redis
       labels:
         app: redis
+        env: production   
     spec:
       containers:
         - name: redis-container

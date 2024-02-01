@@ -3,7 +3,9 @@ kind: CronJob
 metadata:
   name: syncdb-cronjob
   namespace: {{ .Release.Namespace }}
-
+  labels:
+    app: sync-db
+    env: production
 spec:
   schedule: "0 * * * *"
   jobTemplate:

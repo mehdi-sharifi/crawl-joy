@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: postgres
-  tag: alpine
+  tag: alpine3.19
 
 resources:
   limits:

@@ -15,5 +15,7 @@ This Python project is designed to crawl Bama ads and extract relevant informati
 ## Setup
 git clone git@github.com:mehdi-sharifi/crawl-joy.git
 cd crawl-joy
-bash deploy-on-k8s.sh
+to check the notification you can put yout email address in "/helm/crawler-app/valuses.yaml => 'sampleemailaddress' "
+
+bash deploy-on-k8s.sh (or manually run the helms)
 

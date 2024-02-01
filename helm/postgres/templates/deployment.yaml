@@ -3,15 +3,21 @@ kind: Deployment
 metadata:
   name: postgres
   namespace: {{ .Release.Namespace }}
+  labels:
+    app: db
+    env: production  
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: postgres
+      app: db
+      env: production 
   template:
     metadata:
+      name: postgres
       labels:
-        app: postgres
+        app: db
+        env: production 
     spec:
       containers:
         - name: postgres-container
@@ -34,8 +40,6 @@ spec:
                   name: {{ .Values.secrets.name }}
                   key: POSTGRES_PASSWORD
 
-
           ports:
             - containerPort: 5432
-          resources:
-            {{ toYaml .Values.resources | nindent 12 }}
+

@@ -3,7 +3,9 @@ kind: Job
 metadata:
   name: deployment-job
   namespace: {{ .Release.Namespace }}
-
+  labels:
+    app: database-migrate
+    env: production
 spec:
   template:
     spec:
