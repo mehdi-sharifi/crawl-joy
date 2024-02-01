@@ -14,8 +14,9 @@ DB_USER = os.environ.get('POSTGRES_USER')
 DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 
 
-# Sample email addresses
-sample_emails = ["sample@example.com"]
+# Sample email addressess
+sample_emails_address = os.environ.get('SAMPLE_EMAIL_ADDRESS')
+sample_emails = [sample_emails_address]
 
 try:
     # Set up PostgreSQL connection
