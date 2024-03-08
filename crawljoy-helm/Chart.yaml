@@ -1,0 +1,19 @@
+apiVersion: v2
+name: crawljoy-helm
+description: A Helm chart for Kubernetes
+type: application
+version: 1.0.0
+appVersion: "1.16.0"
+
+dependencies:
+  - name: postgres
+    version: 1.0.0
+    repository: file://./charts/postgres
+    
+  - name: redis
+    version: 1.0.0
+    repository: file://./charts/redis
+
+  - name: cron-job-isfahan
+    version: 1.0.0
+    repository: file://./charts/cron-job-isfahan

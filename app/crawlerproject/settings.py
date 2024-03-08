@@ -1,12 +1,12 @@
 from pathlib import Path
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-k6flde0hk+e1@+g3%edmq&&ou&(v-zxqlc#+!hxzs=qr97=0cd'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["crawljoy.devsecworld.com","crawler-app-service"]
-CSRF_TRUSTED_ORIGINS = ["http://crawljoy.devsecworld.com", "https://crawljoy.devsecworld.com", "http://crawler-app-service"]
+ALLOWED_HOSTS = ["crawljoy.devsecworld.com","crawljoy-api-service"]
+CSRF_TRUSTED_ORIGINS = ["http://crawljoy.devsecworld.com", "https://crawljoy.devsecworld.com", "http://crawljoy-api-service"]
 
 THIRD_PARTY_APPS = [
     'rest_framework.authtoken',

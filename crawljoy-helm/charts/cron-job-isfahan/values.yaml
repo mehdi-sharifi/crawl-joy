@@ -1,0 +1,25 @@
+replicaCount: 1
+
+name: isfahan
+labels: 
+  project: crawljoy
+  env: production
+  
+image:
+  repository: mehdish95/crawlerjob
+  tag: v1.1
+
+resources:
+  limits:
+    memory: "256Mi"
+    cpu: "200m"
+  requests:
+    memory: "128Mi"
+    cpu: "100m"
+
+configMaps:
+  name: cron-job-isfahan-config-map
+  config:
+    crawler_api_url: http://crawljoy-api-service:8000/api/v1/crawl/
+    notification_api_url: http://crawljoy-api-service:8000/api/v1/sendnotification/
+    state: isfahan

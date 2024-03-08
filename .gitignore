@@ -480,3 +480,7 @@ tmp
 .production_env
 
 local-helm
+
+helm_backup
+
+crawljoy-helm-local

@@ -1,0 +1,25 @@
+replicaCount: 1
+
+name: redis
+project: crawljoy
+
+labels:
+  project: crawljoy
+  env: production
+
+image:
+  repository: redis
+  tag: alpine3.19
+
+resources:
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
+  requests:
+    memory: "64Mi"
+    cpu: "50m"
+
+service:
+  port: 6379
+  targetPort: 6379
+  type: NodePort    

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    name: {{ .Values.name }}-statefulset
+    project: {{ .Values.labels.project }}
+    env: {{ .Values.labels.env }}  
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      name: {{ .Values.name }}
+      project: {{ .Values.labels.project }}
+      env: {{ .Values.labels.env }}  
+  template:
+    metadata:
+      name: {{ .Values.name }}
+      labels:
+        name: {{ .Values.name }}
+        project: {{ .Values.labels.project }}
+        env: {{ .Values.labels.env }} 
+    spec:
+      containers:
+        - name: {{ .Values.name }}-container
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.configMaps.name }}
+                  key: POSTGRES_DB
+
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.name }}
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.name }}
+                  key: POSTGRES_PASSWORD
+
+          ports:
+            - containerPort: 5432
+

@@ -1,0 +1,55 @@
+replicaCount: 1
+
+name: crawljoy
+labels: 
+  project: crawljoy
+  env: production
+  
+image:
+  repository: mehdish95/crawljoy
+  tag: v6.3
+
+resources:
+  limits:
+    memory: "256Mi"
+    cpu: "200m"
+    
+  requests:
+    memory: "128Mi"
+    cpu: "100m"
+
+secrets:
+  name: crawljoy-secret
+  secret:
+    emailHostUser: example@gmail.com
+    secretKey: django-insecure-k6flde0hk+e1@+g3%edmq&&ou&(v-zxqlc#+!hxzs=qr97=0cd
+    emailHostPassword: <password>
+    postgresUser: tokyo
+    postgressPassword: ASFq3tt1rfc%^212fd
+    
+
+configMaps:
+  name: crawljoy-config-maps
+  config:
+    emailHost: smtp.gmail.com
+    emailUseTls: True
+    postgresDB: crawler_db
+
+service:
+  port: 8000
+  targetPort: 8000
+  type: NodePort
+
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: example.com
+      paths:
+        - path: /
+          backend:
+            serviceName: my-service
+            servicePort: 8000
+

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}-deployment
+  namespace: {{ .Release.Namespace }}
+
+  labels:
+    name: {{ .Values.name }}-deployment
+    project: {{ .Values.labels.project }}
+    env: {{ .Values.labels.env }}
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      name: {{ .Values.name }}
+      project: {{ .Values.labels.project }}
+      env: {{ .Values.labels.env }}
+  template:
+    metadata:
+      name: {{ .Values.name }}
+      labels:
+        name: {{ .Values.name }}
+        project: {{ .Values.labels.project }}
+        env: {{ .Values.labels.env }}
+    spec:
+      containers:
+        - name: {{ .Values.name }}-container
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 6379
+          resources:
+            {{ toYaml .Values.resources | nindent 12 }}
