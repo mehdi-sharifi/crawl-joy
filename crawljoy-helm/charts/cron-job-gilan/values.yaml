@@ -23,3 +23,4 @@ configMaps:
     crawler_api_url: http://crawljoy-api-service:8000/api/v1/crawl/
     notification_api_url: http://crawljoy-api-service:8000/api/v1/sendnotification/
     state: gilan
+    
