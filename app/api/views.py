@@ -225,6 +225,11 @@ class CrawlView(APIView):
         """
         data = request.data
         state = data["state"]
+        if not cache.keys("*"):
+            obj = CarAd.objects.all().values_list('code', flat=True)
+            for code in obj:
+                cache.set(code, True, timeout=None)
+        
         ads_data = fetch_from_bama(state)
         ads_status_code = ads_data["status"]
         ads_reason = ads_data["reason"]

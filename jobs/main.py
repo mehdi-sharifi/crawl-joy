@@ -44,9 +44,6 @@ def crawl(baseurl, timeout, state):
     try:
         response = requests.post(baseurl, data=payload, timeout=timeout ,verify=False)
         new_signe = bool(response.json()["new"])
-        print(new_signe)
-        print(response.json())
-    
         if new_signe:
             ads = response.json()["ads"]
             for ad in ads:

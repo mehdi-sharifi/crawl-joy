@@ -33,6 +33,7 @@ def fetch_from_bama(state):
                         "color": ad["detail"]["color"],
                         "body_status": ad["detail"]["body_status"],
                         "modified_date": ad["detail"]["modified_date"],
+                        "state": state
                     }
             logger.info(f"Data fetched successfully from Bama API for state: {state}")
             return ({"status": status, "reason": reason, "ads": car_ads_dict})
@@ -40,10 +41,10 @@ def fetch_from_bama(state):
             logger.error(f"Failed to fetch data from Bama API. Status code: {response.status_code}, reason: {reason}")
             return ({"status": status, "reason": reason, "ads": None})
     except requests.Timeout:
-        logging.error(f'Request timed out.')
+        logger.error(f'Request timed out.')
         return ({"status": 408, "reason": "Request Timeout", "ads": None})
     except requests.ConnectionError:
-        logging.error(f'Connection error.')
+        logger.error(f'Connection error.')
         return ({"status": 503, "reason": "Connection Timeout", "ads": None})
         
     except Exception as e:
