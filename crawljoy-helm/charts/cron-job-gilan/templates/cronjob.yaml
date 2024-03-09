@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Values.name }}-cronjob
+  namespace: {{ .Release.Namespace }}
+  labels:
+    name: {{ .Values.name }}-cronjob
+    project: {{ .Values.labels.project }}
+    env: {{ .Values.labels.env }}
+    
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: {{ .Values.name }}-container
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              envFrom:
+              - configMapRef:
+                  name: {{ .Values.configMaps.name }}
+              command: ["/bin/sh"]
+              args: ["-c", "python main.py"]
+          restartPolicy: OnFailure
