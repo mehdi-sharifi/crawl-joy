@@ -1,6 +1,6 @@
 replicaCount: 1
 
-name: isfahan
+name: gilan
 labels: 
   project: crawljoy
   env: production
@@ -18,9 +18,9 @@ resources:
     cpu: "100m"
 
 configMaps:
-  name: cron-job-isfahan-config-map
+  name: cron-job-gilan-config-map
   config:
     crawler_api_url: http://crawljoy-api-service:8000/api/v1/crawl/
     notification_api_url: http://crawljoy-api-service:8000/api/v1/sendnotification/
     state: gilan
-    
+

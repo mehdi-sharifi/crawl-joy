@@ -17,3 +17,7 @@ dependencies:
   - name: cron-job-isfahan
     version: 1.0.0
     repository: file://./charts/cron-job-isfahan
+
+  - name: cron-job-gilan
+    version: 1.0.0
+    repository: file://./charts/cron-job-gilan
