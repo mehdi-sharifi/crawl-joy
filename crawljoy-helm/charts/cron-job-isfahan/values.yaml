@@ -7,7 +7,7 @@ labels:
   
 image:
   repository: mehdish95/crawlerjob
-  tag: v1.1
+  tag: v1.2
 
 resources:
   limits:
