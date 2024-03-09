@@ -12,6 +12,7 @@ class Person(models.Model):
 
 class CarAd(models.Model):
     code = models.CharField(max_length=100, primary_key=True)
+    state = models.CharField(max_length=100)
     url = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     price = models.CharField(max_length=20)

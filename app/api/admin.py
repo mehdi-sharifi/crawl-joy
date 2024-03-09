@@ -8,6 +8,6 @@ admin.site.register(Person, PersonAdmin)
 
 
 class CarAdAdmin(admin.ModelAdmin):
-    list_display = ('code', 'url', 'title', 'price', 'year', 'mileage', 'color', 'body_status', 'modified_date')
+    list_display = ('code', 'state','url', 'title', 'price', 'year', 'mileage', 'color', 'body_status', 'modified_date')
     
 admin.site.register(CarAd, CarAdAdmin)

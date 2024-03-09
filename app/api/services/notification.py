@@ -45,6 +45,6 @@ def send_email(state, url, title, year, mileage, price, recipients):
             # Send the email
             server.sendmail(email_address, recipients, msg.as_string())
 
-        logger.info('Email sent successfully!')
+        logger.info(f'Email sent successfully! for ads: {title} ')
     except Exception as e:
         logger.error(f"Error sending email: {str(e)}")

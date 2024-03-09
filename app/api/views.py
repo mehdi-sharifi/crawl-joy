@@ -232,15 +232,16 @@ class CrawlView(APIView):
         if ads_status_code == 200:
             new_ads = []
             for ad in ads.values():
-                if not cache.get(ad['code']):  # If the ad is not in Redis, it's a new ad
-                    cache.set(ad['code'], True, timeout=None)  # Add the new ad's code to Redis
-                    new_ads.append(ad)  # Add the new ad to the new_ads list
+                if not cache.get(ad['code']):
+                    if not CarAd.objects.filter(code=ad['code']).exists():
+                        cache.set(ad['code'], True, timeout=None)
+                        new_ads.append(ad)
+                        car_ad = CarAd(**ad)
+                        car_ad.save()
+                    else:
+                        cache.set(ad['code'], True, timeout=None)
 
-                    # Create a new CarAd instance and save it to the database
-                    car_ad = CarAd(**ad)
-                    car_ad.save()
-
-            if new_ads:  # If there are new ads
+            if new_ads:
                 serializer = CarAdSerializer(new_ads, many=True)  # Serialize only the new ads
                 return Response({"message": "New ads have been added!", "ads": serializer.data, "new": True }, status=200)
             else:

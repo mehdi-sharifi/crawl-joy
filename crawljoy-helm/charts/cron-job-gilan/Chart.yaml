@@ -1,0 +1,4 @@
+apiVersion: v2
+name: cron-job-gilan
+description: A Helm chart for the Crawler App
+version: 1.0.0

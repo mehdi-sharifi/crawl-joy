@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMaps.name }}
+  namespace: {{ .Release.Namespace }}
+data: 
+  STATE: {{ .Values.configMaps.config.state | quote }}
+  CRAWLER_API_END_POINT: {{ .Values.configMaps.config.crawler_api_url | quote }}
+  NOTIFICATION_API_END_POINT: {{ .Values.configMaps.config.notification_api_url | quote }}
