@@ -67,7 +67,6 @@ DATABASES = {
         'USER': os.environ.get('CRAWLER_POSTGRES_USER'),
         'PASSWORD': os.environ.get('CRAWLER_POSTGRES_PASSWORD'),
         'HOST': 'postgres-service',
-        # 'PORT': '32432',
         'PORT': '5432',
     }
 }
