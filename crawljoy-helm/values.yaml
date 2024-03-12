@@ -7,7 +7,7 @@ labels:
   
 image:
   repository: mehdish95/crawljoy
-  tag: v6.6
+  tag: v6.9
 
 resources:
   limits:
