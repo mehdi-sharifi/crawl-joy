@@ -21,9 +21,9 @@ resources:
 secrets:
   name: crawljoy-secret
   secret:
-    emailHostUser: msh181374@gmail.com
+    emailHostUser: XXXX@gmail.com
     secretKey: django-insecure-k6flde0hk+e1@+g3%edmq&&ou&(v-zxqlc#+!hxzs=qr97=0cd
-    emailHostPassword: roibydtxrwkvkeev
+    emailHostPassword: XXXXX
     postgresUser: tokyo
     postgressPassword: ASFq3tt1rfc%^212fd
     
